@@ -20,16 +20,45 @@ namespace VideoGameOrderingSystem.UnitTests.Services
         [Test]
         public void GivenAnItemAddItemToOrderUpdatesProperly()
         {
-            Item item = new Item(1, "Halo", "best game", Categories.FirstPersonShooter, 50.50, 100);
+            Item item = new Item(1, "Halo", "best game", Categories.FirstPersonShooter, 50.50, 2, 100);
             Order order = new Order();
             order.SetItems(_orderingService.AddItemToOrder(item, order));
-            
+
             Dictionary<int, Item> actualItems = order.getItems();
             int expectedLength = 1;
             int actualLength = actualItems.Count();
 
             Assert.AreEqual(expectedLength, actualLength);
             Assert.AreEqual(item, actualItems[item.getID()]);
+        }
+
+        [Test]
+        public void GivenTwoItemsWithSameIdQuantityOrderedUpdatesAppropriately()
+        {
+            Item item1 = new Item(1, "Halo", "best game", Categories.FirstPersonShooter, 50.50, 2, 100);
+            Item item2 = new Item(1, "Halo", "best game", Categories.FirstPersonShooter, 50.50, 8, 100);
+            
+            Dictionary<int, Item> items = new Dictionary<int, Item>()
+            {
+                {item1.getID(), item1 },
+                {item2.getID(), item2 }
+            };
+            
+            Order order = new Order();
+
+            order.SetItems(_orderingService.AddItemToOrder(item1, order));
+            order.SetItems(_orderingService.AddItemToOrder(item2, order));
+
+            Dictionary<int, Item> actualItems = order.getItems();
+
+            int expectedLength = 1;
+            int actualLength = actualItems.Count();
+
+            int expectedTotalOrdered = 10;
+            int actualTotalOrdered = actualItems[item1.getID()].getTotalOrdered();
+
+            Assert.AreEqual(expectedLength, actualLength);
+            Assert.AreEqual(expectedTotalOrdered, actualTotalOrdered);
         }
     }
 }
