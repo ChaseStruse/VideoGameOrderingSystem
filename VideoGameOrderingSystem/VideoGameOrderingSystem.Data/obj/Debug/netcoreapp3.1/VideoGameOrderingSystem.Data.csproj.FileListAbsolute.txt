@@ -1,8 +1,0 @@
-D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\bin\Debug\netcoreapp3.1\VideoGameOrderingSystem.Data.deps.json
-D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\bin\Debug\netcoreapp3.1\VideoGameOrderingSystem.Data.dll
-D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\bin\Debug\netcoreapp3.1\VideoGameOrderingSystem.Data.pdb
-D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\obj\Debug\netcoreapp3.1\VideoGameOrderingSystem.Data.AssemblyInfoInputs.cache
-D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\obj\Debug\netcoreapp3.1\VideoGameOrderingSystem.Data.AssemblyInfo.cs
-D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\obj\Debug\netcoreapp3.1\VideoGameOrderingSystem.Data.csproj.CoreCompileInputs.cache
-D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\obj\Debug\netcoreapp3.1\VideoGameOrderingSystem.Data.dll
-D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\obj\Debug\netcoreapp3.1\VideoGameOrderingSystem.Data.pdb
