@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiteDB;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using VideoGameOrderingSystem.Data.Models;
@@ -16,11 +17,14 @@ namespace VideoGameOrderingSystem
             {
                 var currentTotalOrdered = currentItems[key].getTotalOrdered();
                 currentItems[key].setTotalOrdered(currentTotalOrdered += item.getTotalOrdered());
+                //itemCollection.Update(currentItems[key]);
             }
             else
             {
                 currentItems.Add(key, item);
+                //itemCollection.Insert(item);
             }
+            
             return currentItems;
         }
     }
