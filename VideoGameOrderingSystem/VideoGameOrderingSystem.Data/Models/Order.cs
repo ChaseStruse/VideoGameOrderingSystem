@@ -5,12 +5,18 @@ using System.Text;
 
 namespace VideoGameOrderingSystem.Data.Models
 {
-    class Order
+    public class Order
     {
         private int id;
         private DateTime fulfillDate;
         private Dictionary<int, Item> items;
 
+        public Order()
+        {
+            id = 0;
+            fulfillDate = DateTime.Now;
+            items = new Dictionary<int, Item>();
+        }
         public Order(int id, DateTime fulfillDate, Dictionary<int, Item> items)
         {
             this.id = id;
@@ -29,6 +35,10 @@ namespace VideoGameOrderingSystem.Data.Models
         public Dictionary<int, Item> getItems()
         {
             return items;
+        }
+        public void SetItems(Dictionary<int, Item> items)
+        {
+            this.items = items;
         }
     }
 }
