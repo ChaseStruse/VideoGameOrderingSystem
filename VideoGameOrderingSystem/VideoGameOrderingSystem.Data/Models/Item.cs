@@ -11,15 +11,17 @@ namespace VideoGameOrderingSystem.Data.Models
         private string description;
         private Categories category;
         private double price;
+        private int totalOrdered;
         private int totalInventory;
 
-        public Item(int id, string name, string description, Categories category, double price, int totalInventory)
+        public Item(int id, string name, string description, Categories category, double price, int totalOrdered, int totalInventory)
         {
             this.id = id;
             this.name = name;
             this.description = description;
             this.category = category;
             this.price = price;
+            this.totalOrdered = totalOrdered;
             this.totalInventory = totalInventory;
         }
 
@@ -42,6 +44,14 @@ namespace VideoGameOrderingSystem.Data.Models
         public double getPrice()
         {
             return price;
+        }
+        public int getTotalOrdered()
+        {
+            return totalOrdered;
+        }
+        public void setTotalOrdered(int totalOrdered)
+        {
+            this.totalOrdered = totalOrdered;
         }
         public int getTotalInventory()
         {

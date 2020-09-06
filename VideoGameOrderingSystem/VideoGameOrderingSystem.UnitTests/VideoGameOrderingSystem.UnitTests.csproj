@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VideoGameOrderingSystem.Data\VideoGameOrderingSystem.Data.csproj" />
     <ProjectReference Include="..\VideoGameOrderingSystem\VideoGameOrderingSystem.csproj" />
   </ItemGroup>
 
