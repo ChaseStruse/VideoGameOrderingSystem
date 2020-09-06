@@ -1,4 +1,5 @@
 ﻿using System;
+using VideoGameOrderingSystem.Data.Models;
 
 namespace VideoGameOrderingSystem
 {
@@ -6,7 +7,7 @@ namespace VideoGameOrderingSystem
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello Worls");
         }
     }
 }
