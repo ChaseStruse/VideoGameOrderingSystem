@@ -9,7 +9,9 @@ namespace VideoGameOrderingSystem
     {
         public Dictionary<int, Item> AddItemToOrder(Item item, Order order)
         {
-            return null;
+            var items = order.getItems();
+            items.Add(item.getID(), item);
+            return items;
         }
     }
 }
