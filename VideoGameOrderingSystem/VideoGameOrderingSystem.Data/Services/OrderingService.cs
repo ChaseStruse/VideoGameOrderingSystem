@@ -9,9 +9,19 @@ namespace VideoGameOrderingSystem
     {
         public Dictionary<int, Item> AddItemToOrder(Item item, Order order)
         {
-            var items = order.getItems();
-            items.Add(item.getID(), item);
-            return items;
+            var currentItems = order.getItems();
+            var key = item.getID();
+
+            if (currentItems.ContainsKey(key))
+            {
+                var currentTotalOrdered = currentItems[key].getTotalOrdered();
+                currentItems[key].setTotalOrdered(currentTotalOrdered += item.getTotalOrdered());
+            }
+            else
+            {
+                currentItems.Add(key, item);
+            }
+            return currentItems;
         }
     }
 }

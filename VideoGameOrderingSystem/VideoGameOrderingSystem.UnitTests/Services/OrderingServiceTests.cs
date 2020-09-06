@@ -38,12 +38,6 @@ namespace VideoGameOrderingSystem.UnitTests.Services
             Item item1 = new Item(1, "Halo", "best game", Categories.FirstPersonShooter, 50.50, 2, 100);
             Item item2 = new Item(1, "Halo", "best game", Categories.FirstPersonShooter, 50.50, 8, 100);
             
-            Dictionary<int, Item> items = new Dictionary<int, Item>()
-            {
-                {item1.getID(), item1 },
-                {item2.getID(), item2 }
-            };
-            
             Order order = new Order();
 
             order.SetItems(_orderingService.AddItemToOrder(item1, order));

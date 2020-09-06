@@ -49,6 +49,10 @@ namespace VideoGameOrderingSystem.Data.Models
         {
             return totalOrdered;
         }
+        public void setTotalOrdered(int totalOrdered)
+        {
+            this.totalOrdered = totalOrdered;
+        }
         public int getTotalInventory()
         {
             return totalInventory;
