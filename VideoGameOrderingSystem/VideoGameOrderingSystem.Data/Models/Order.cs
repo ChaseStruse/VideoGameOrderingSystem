@@ -7,8 +7,9 @@ namespace VideoGameOrderingSystem.Data.Models
 {
     public class Order
     {
-        private int id { get; set; }
-        private DateTime fulfillDate { get; set; }
-        private Dictionary<int, Item> items { get; set; }
+        public int id { get; set; }
+        public DateTime fulfillDate { get; set; }
+        public Dictionary<int, Item> items { get; set; }
+        public bool isValid { get; set; }
     }
 }
