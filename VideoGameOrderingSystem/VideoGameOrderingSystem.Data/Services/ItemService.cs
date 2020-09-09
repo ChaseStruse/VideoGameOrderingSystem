@@ -33,5 +33,45 @@ namespace VideoGameOrderingSystem.Data.Services
                 return null;
             }
         }
+
+        public void AddInventory(int key, int amountToAdd)
+        {
+            try
+            {
+                var itemCollection = database.GetCollection<Item>("Items");
+                var item = GetItem(key);
+
+                item.totalInventory += amountToAdd;
+                itemCollection.Update(item);
+            }
+            catch
+            {
+                Console.WriteLine("Could not find item with key: " + key);
+            }
+        }
+
+        public void ReduceInventory(int key, int amountToReduce)
+        {
+            try
+            {
+                var itemCollection = database.GetCollection<Item>("Items");
+                var item = GetItem(key);
+
+                if(item != null && amountToReduce <= item.totalInventory)
+                {
+                    item.totalInventory -= amountToReduce;
+                    itemCollection.Update(item);
+                }
+                else
+                {
+                    if (item == null) Console.WriteLine("Could not find item with key: " + key);
+                    else Console.WriteLine("Amount to reduce was greater than total inventory. Total inventory is " + item.totalInventory);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error occured please try again");
+            }
+        }
     }
 }

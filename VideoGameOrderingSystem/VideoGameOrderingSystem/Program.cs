@@ -18,10 +18,12 @@ namespace VideoGameOrderingSystem
                 description = "Halo the best fps ever",
                 category = Categories.FirstPersonShooter,
                 price = 60.00,
-                totalInventory = 2
+                totalInventory = 10
             };
 
             itemService.AddItemToDatabase(item);
+            itemService.AddInventory(item.id, 5);
+            itemService.ReduceInventory(item.id, 5);
 
             var result = itemService.GetItem(item.id);
 
