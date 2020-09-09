@@ -8,19 +8,29 @@ namespace VideoGameOrderingSystem.Data.Services
 {
     public class ItemService
     {
-        private LiteDatabase database = new LiteDatabase(@"D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\Database\Items.db");
+        private LiteDatabase database = new LiteDatabase(@"D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\Database\Main.db");
         public void AddItemToDatabase(Item item)
         {
             var itemCollection = database.GetCollection<Item>("Items");
 
-            var result = itemCollection.Query()
-                                        .Where(x => x.getID() == item.getID())
-                                        .FirstOrDefault();
+            if (GetItem(item.id) == null) itemCollection.Insert(item);
+            else Console.WriteLine("Item with this ID already exists please try again");
+        }
 
-            if (result != null) Console.WriteLine("Item already exists with that ID");
-            else
+        public Item GetItem(int key)
+        {
+            try
             {
-                itemCollection.Insert(item);
+                var itemCollection = database.GetCollection<Item>("Items");
+                var result = itemCollection.Query()
+                                            .Where(x => x.id == key)
+                                            .Select(x => new Item { id = x.id, name = x.name, description = x.description, category = x.category, price = x.price, totalInventory = x.totalInventory })
+                                            .FirstOrDefault();
+                return result;
+            }
+            catch
+            {
+                return null;
             }
         }
     }

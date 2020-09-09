@@ -9,19 +9,23 @@ namespace VideoGameOrderingSystem
     {
         static void Main(string[] args)
         {
-            LiteDatabase database = new LiteDatabase(@"D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\Database\Items.db");
-            var itemCollection = database.GetCollection<Item>("Items");
             ItemService itemService = new ItemService();
 
-            Item item = new Item(1, "Halo", "Best FPS known to man kind", Categories.FirstPersonShooter, 60, 0, 10);
+            Item item = new Item
+            {
+                id = 1,
+                name = "Halo",
+                description = "Halo the best fps ever",
+                category = Categories.FirstPersonShooter,
+                price = 60.00,
+                totalInventory = 2
+            };
 
             itemService.AddItemToDatabase(item);
 
-            var result = itemCollection.Query()
-                            .Where(x => x.getID() == item.getID())
-                            .FirstOrDefault();
+            var result = itemService.GetItem(item.id);
 
-            Console.WriteLine(result.getID() + " " + result.getName());
+            Console.WriteLine(result.id + " " + result.name + " " + result.description + " " + result.category + " " + result.price + " " + result.totalInventory);
 
         }
     }
