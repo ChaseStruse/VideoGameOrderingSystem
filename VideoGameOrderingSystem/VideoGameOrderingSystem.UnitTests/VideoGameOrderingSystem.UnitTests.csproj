@@ -17,4 +17,8 @@
     <ProjectReference Include="..\VideoGameOrderingSystem\VideoGameOrderingSystem.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
