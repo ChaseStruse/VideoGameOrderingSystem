@@ -9,23 +9,21 @@ namespace VideoGameOrderingSystem
     {
         static void Main(string[] args)
         {
+
             ItemService itemService = new ItemService();
+            OrderingService orderingService = new OrderingService();
+            
+            var halo = itemService.GetItem(1);
+            var callOfDuty = itemService.GetItem(2);
+            
+            Order order = new Order();
 
-            Item item = new Item
-            {
-                id = 1,
-                name = "Halo",
-                description = "Halo the best fps ever",
-                category = Categories.FirstPersonShooter,
-                price = 60.00,
-                totalInventory = 10
-            };
-
-            itemService.AddItemToDatabase(item);
-            itemService.AddInventory(item.id, 5);
-            itemService.ReduceInventory(item.id, 5);
-
-            var result = itemService.GetItem(item.id);
+            orderingService.AddItemToOrder(order, halo, 1);
+            orderingService.AddItemToOrder(order, callOfDuty, 1);
+            
+            //itemService.AddItemToDatabase(item);
+            
+            var result = itemService.GetItem(2);
 
             Console.WriteLine(result.id + " " + result.name + " " + result.description + " " + result.category + " " + result.price + " " + result.totalInventory);
 

@@ -50,28 +50,50 @@ namespace VideoGameOrderingSystem.Data.Services
             }
         }
 
-        public void ReduceInventory(int key, int amountToReduce)
+        public void UpdateTotalInventoryAfterReduction(Item item, int amountToReduce)
         {
             try
             {
                 var itemCollection = database.GetCollection<Item>("Items");
-                var item = GetItem(key);
 
-                if(item != null && amountToReduce <= item.totalInventory)
+                if (item.hasEnoughInventory)
                 {
                     item.totalInventory -= amountToReduce;
                     itemCollection.Update(item);
-                }
-                else
-                {
-                    if (item == null) Console.WriteLine("Could not find item with key: " + key);
-                    else Console.WriteLine("Amount to reduce was greater than total inventory. Total inventory is " + item.totalInventory);
                 }
             }
             catch
             {
                 Console.WriteLine("Error occured please try again");
             }
+        }
+
+        public void CheckItemHasEnoughInventory(Item item, int amountToReduce)
+        {
+            if (amountToReduce <= item.totalInventory)
+            {
+                item.hasEnoughInventory = true;
+            }
+            else
+            {
+                item.hasEnoughInventory = false;
+            }
+        }
+
+        public void ReduceInventory(Item item, Order order)
+        {
+            var amountToReduce = order.amountOrdered[item.id];
+            CheckItemHasEnoughInventory(item, amountToReduce);
+            if (item.hasEnoughInventory)
+            {
+                UpdateTotalInventoryAfterReduction(item, amountToReduce);
+            }
+            else
+            {
+                order.isValid = false;
+                Console.WriteLine("Item " + item.name + " could not be ordered due to insufficent inventory");
+            }
+
         }
     }
 }
