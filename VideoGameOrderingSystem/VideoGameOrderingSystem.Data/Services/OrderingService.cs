@@ -16,16 +16,16 @@ namespace VideoGameOrderingSystem
             order.items.Add(item.id, item);
             order.amountOrdered.Add(item.id, amountOrdered);
         }
-        public void ValidateItemInventoryAndReduceInventory(Order order)
+        public void ValidateItemInventoryAndReduceInventory(Order order, LiteDatabase database)
         {
             foreach (Item item in order.items.Values)
             {
-                itemService.ReduceInventory(item, order);
+                itemService.ReduceInventory(item, order, database);
             }
         }
         public void CommitOrderToDatabase(Order order)
         {
-            LiteDatabase database = new LiteDatabase(@"D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\Database\Main.db");
+            LiteDatabase database = new LiteDatabase(@"VideoGameOrderingSystem/VideoGameOrderingSystem.Data/Database/Main.db");
             try
             {
                 if (order.isValid)
@@ -42,6 +42,23 @@ namespace VideoGameOrderingSystem
             catch
             {
                 Console.WriteLine("There was an error please try again");
+            }
+        }
+        
+        public Order GetOrder(int key, LiteDatabase database)
+        {
+            try
+            {
+                var orderCollection = database.GetCollection<Order>("Orders");
+                var result = orderCollection.Query()
+                                            .Where(x => x.id == key)
+                                            .Select(x => new Order { id = x.id, fulfillDate = x.fulfillDate, items = x.items, amountOrdered = x.amountOrdered, isValid = x.isValid })
+                                            .FirstOrDefault();
+                return result;
+            }
+            catch
+            {
+                return null;
             }
         }
     }

@@ -13,8 +13,10 @@ namespace VideoGameOrderingSystem
             ItemService itemService = new ItemService();
             OrderingService orderingService = new OrderingService();
             
-            var halo = itemService.GetItem(1);
-            var callOfDuty = itemService.GetItem(2);
+            LiteDatabase database = new LiteDatabase(@"/home/codespace/workspace/VideoGameOrderingSystem/VideoGameOrderingSystem/VideoGameOrderingSystem.Data/Database/Main.db");
+            
+            var halo = itemService.GetItem(1, database);
+            var callOfDuty = itemService.GetItem(2, database);
             
             Order order = new Order();
 
@@ -23,10 +25,11 @@ namespace VideoGameOrderingSystem
             
             //itemService.AddItemToDatabase(item);
             
-            var result = itemService.GetItem(2);
+            var itemResult = itemService.GetItem(2, database);
 
-            Console.WriteLine(result.id + " " + result.name + " " + result.description + " " + result.category + " " + result.price + " " + result.totalInventory);
-
+            Console.WriteLine(itemResult.id + " " + itemResult.name + " " + itemResult.description + " " + itemResult.category + " " + itemResult.price + " " + itemResult.totalInventory);
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine(order.id + " " + order.items.Values);
         }
     }
 }
