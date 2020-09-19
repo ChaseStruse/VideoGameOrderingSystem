@@ -7,6 +7,13 @@ using VideoGameOrderingSystem.Data.Services;
 
 namespace VideoGameOrderingSystem
 {
+    public interface IOrderingService
+    {
+        void AddItemToOrder(Order order, Item item, int amountOrdered);
+        void ValidateItemInventoryAndReduceInventory(Order order);
+        void CommitOrderToDatabase(Order order);
+        Order GetOrder(int key, LiteDatabase database);
+    }
     public class OrderingService
     {
         private LiteDatabase database;
