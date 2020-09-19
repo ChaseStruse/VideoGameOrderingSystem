@@ -19,7 +19,7 @@ namespace VideoGameOrderingSystem
             var halo = itemService.GetItem(1);
             var callOfDuty = itemService.GetItem(2);
             
-            Order order = new Order();
+            //Order order = new Order();
 
             //orderingService.AddItemToOrder(order, halo, 1);
             //orderingService.AddItemToOrder(order, callOfDuty, 1);
@@ -29,8 +29,8 @@ namespace VideoGameOrderingSystem
             var itemResult = itemService.GetItem(2);
 
             Console.WriteLine(itemResult.id + " " + itemResult.name + " " + itemResult.description + " " + itemResult.category + " " + itemResult.price + " " + itemResult.totalInventory);
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine(order.id + " " + order.items.Values);
+            //Console.WriteLine("--------------------------------");
+            //Console.WriteLine(order.id + " " + order.items);
         }
     }
 }

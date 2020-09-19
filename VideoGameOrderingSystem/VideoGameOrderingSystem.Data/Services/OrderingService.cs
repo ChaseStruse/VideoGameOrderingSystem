@@ -45,7 +45,6 @@ namespace VideoGameOrderingSystem
             {
                 if (order.isValid)
                 {
-                    var orderCollection = database.GetCollection<Order>("Orders");
                     order.fulfillDate = DateTime.UtcNow;
                     orderCollection.Insert(order);
                 }
@@ -64,7 +63,6 @@ namespace VideoGameOrderingSystem
         {
             try
             {
-                var orderCollection = database.GetCollection<Order>("Orders");
                 var result = orderCollection.Query()
                                             .Where(x => x.id == key)
                                             .Select(x => new Order { id = x.id, fulfillDate = x.fulfillDate, items = x.items, amountOrdered = x.amountOrdered, isValid = x.isValid })
