@@ -13,7 +13,7 @@ namespace VideoGameOrderingSystem
             ItemService itemService = new ItemService();
             //OrderingService orderingService = new OrderingService();
             
-            LiteDatabase database = new LiteDatabase(@"/home/codespace/workspace/VideoGameOrderingSystem/VideoGameOrderingSystem/VideoGameOrderingSystem.Data/Database/Main.db");
+            LiteDatabase database = new LiteDatabase(@"D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\Database\Main.db");
             
             var halo = itemService.GetItem(1, database);
             var callOfDuty = itemService.GetItem(2, database);

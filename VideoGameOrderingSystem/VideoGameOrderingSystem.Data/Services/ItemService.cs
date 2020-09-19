@@ -11,7 +11,7 @@ namespace VideoGameOrderingSystem.Data.Services
     {
         public void AddItemToDatabase(Item item, LiteDatabase database)
         {
-            var itemCollection = context.database.GetCollection<Item>("Items");
+            var itemCollection = database.GetCollection<Item>("Items");
 
             if (GetItem(item.id, database) == null) itemCollection.Insert(item);
             else Console.WriteLine("Item with this ID already exists please try again");
@@ -21,7 +21,7 @@ namespace VideoGameOrderingSystem.Data.Services
         {
             try
             {
-                var itemCollection = context.database.GetCollection<Item>("Items");
+                var itemCollection = database.GetCollection<Item>("Items");
                 var result = itemCollection.Query()
                                             .Where(x => x.id == key)
                                             .Select(x => new Item { id = x.id, name = x.name, description = x.description, category = x.category, price = x.price, totalInventory = x.totalInventory })
@@ -54,7 +54,7 @@ namespace VideoGameOrderingSystem.Data.Services
         {
             try
             {
-                var itemCollection = context.database.GetCollection<Item>("Items");
+                var itemCollection = database.GetCollection<Item>("Items");
 
                 if (item.hasEnoughInventory)
                 {
