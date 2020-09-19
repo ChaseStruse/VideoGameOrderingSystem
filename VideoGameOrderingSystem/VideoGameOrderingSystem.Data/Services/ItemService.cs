@@ -9,24 +9,38 @@ namespace VideoGameOrderingSystem.Data.Services
 {
     public interface IItemService
     {
-        void AddItemToDatabase(Item item, LiteDatabase database);
-        Item GetItem(int key, LiteDatabase database);
-        void AddInventory(int key, int amountToAdd, LiteDatabase database);
-        void UpdateTotalInventoryAfterReduction(Item item, int amountToReduce, LiteDatabase database);
+        void AddItemToDatabase(Item item);
+        Item GetItem(int key);
+        void AddInventory(int key, int amountToAdd);
+        void UpdateTotalInventoryAfterReduction(Item item, int amountToReduce);
         void CheckItemHasEnoughInventory(Item item, int amountToReduce);
-        void ReduceInventory(Item item, Order order, LiteDatabase database);
+        void ReduceInventory(Item item, Order order);
     }
     public class ItemService : IItemService
     {
-        public void AddItemToDatabase(Item item, LiteDatabase database)
-        {
-            var itemCollection = database.GetCollection<Item>("Items");
+        private LiteDatabase database;
+        private ILiteCollection<Item> itemCollection;
 
-            if (GetItem(item.id, database) == null) itemCollection.Insert(item);
-            else Console.WriteLine("Item with this ID already exists please try again");
+        public ItemService(LiteDatabase _database)
+        {
+            database = _database;
+            itemCollection = database.GetCollection<Item>("Items");
         }
 
-        public Item GetItem(int key, LiteDatabase database)
+        public bool AddItemToDatabase(Item item)
+        {
+            var itemAdded = false;
+
+            if (GetItem(item.id) == null)
+            {
+                itemCollection.Insert(item);
+                itemAdded = true;
+            }
+
+            return itemAdded;
+        }
+
+        public Item GetItem(int key)
         {
             try
             {
@@ -43,12 +57,12 @@ namespace VideoGameOrderingSystem.Data.Services
             }
         }
 
-        public void AddInventory(int key, int amountToAdd, LiteDatabase database)
+        public void AddInventory(int key, int amountToAdd)
         {
             try
             {
                 var itemCollection = database.GetCollection<Item>("Items");
-                var item = GetItem(key, database);
+                var item = GetItem(key);
 
                 item.totalInventory += amountToAdd;
                 itemCollection.Update(item);
@@ -59,7 +73,7 @@ namespace VideoGameOrderingSystem.Data.Services
             }
         }
 
-        public void UpdateTotalInventoryAfterReduction(Item item, int amountToReduce, LiteDatabase database)
+        public void UpdateTotalInventoryAfterReduction(Item item, int amountToReduce)
         {
             try
             {
@@ -89,13 +103,13 @@ namespace VideoGameOrderingSystem.Data.Services
             }
         }
 
-        public void ReduceInventory(Item item, Order order, LiteDatabase database)
+        public void ReduceInventory(Item item, Order order)
         {
             var amountToReduce = order.amountOrdered[item.id];
             CheckItemHasEnoughInventory(item, amountToReduce);
             if (item.hasEnoughInventory)
             {
-                UpdateTotalInventoryAfterReduction(item, amountToReduce, database);
+                UpdateTotalInventoryAfterReduction(item, amountToReduce);
             }
             else
             {
