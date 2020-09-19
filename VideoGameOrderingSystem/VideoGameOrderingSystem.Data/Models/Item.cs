@@ -13,5 +13,6 @@ namespace VideoGameOrderingSystem.Data.Models
         public Categories category { get; set; }
         public double price { get; set; }
         public int totalInventory { get; set; }
+        public bool hasEnoughInventory { get; set; } = true;
     }
 }

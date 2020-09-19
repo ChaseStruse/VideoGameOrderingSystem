@@ -9,26 +9,27 @@ namespace VideoGameOrderingSystem
     {
         static void Main(string[] args)
         {
+
             ItemService itemService = new ItemService();
+            OrderingService orderingService = new OrderingService();
+            
+            LiteDatabase database = new LiteDatabase(@"/home/codespace/workspace/VideoGameOrderingSystem/VideoGameOrderingSystem/VideoGameOrderingSystem.Data/Database/Main.db");
+            
+            var halo = itemService.GetItem(1, database);
+            var callOfDuty = itemService.GetItem(2, database);
+            
+            Order order = new Order();
 
-            Item item = new Item
-            {
-                id = 1,
-                name = "Halo",
-                description = "Halo the best fps ever",
-                category = Categories.FirstPersonShooter,
-                price = 60.00,
-                totalInventory = 10
-            };
+            orderingService.AddItemToOrder(order, halo, 1);
+            orderingService.AddItemToOrder(order, callOfDuty, 1);
+            
+            //itemService.AddItemToDatabase(item);
+            
+            var itemResult = itemService.GetItem(2, database);
 
-            itemService.AddItemToDatabase(item);
-            itemService.AddInventory(item.id, 5);
-            itemService.ReduceInventory(item.id, 5);
-
-            var result = itemService.GetItem(item.id);
-
-            Console.WriteLine(result.id + " " + result.name + " " + result.description + " " + result.category + " " + result.price + " " + result.totalInventory);
-
+            Console.WriteLine(itemResult.id + " " + itemResult.name + " " + itemResult.description + " " + itemResult.category + " " + itemResult.price + " " + itemResult.totalInventory);
+            Console.WriteLine("--------------------------------");
+            Console.WriteLine(order.id + " " + order.items.Values);
         }
     }
 }
