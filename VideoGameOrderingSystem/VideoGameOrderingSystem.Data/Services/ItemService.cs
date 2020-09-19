@@ -9,16 +9,15 @@ namespace VideoGameOrderingSystem.Data.Services
 {
     public class ItemService
     {
-        private DatabaseContext context = new DatabaseContext();
-        public void AddItemToDatabase(Item item)
+        public void AddItemToDatabase(Item item, LiteDatabase database)
         {
             var itemCollection = context.database.GetCollection<Item>("Items");
 
-            if (GetItem(item.id) == null) itemCollection.Insert(item);
+            if (GetItem(item.id, database) == null) itemCollection.Insert(item);
             else Console.WriteLine("Item with this ID already exists please try again");
         }
 
-        public Item GetItem(int key)
+        public Item GetItem(int key, LiteDatabase database)
         {
             try
             {
@@ -35,12 +34,12 @@ namespace VideoGameOrderingSystem.Data.Services
             }
         }
 
-        public void AddInventory(int key, int amountToAdd)
+        public void AddInventory(int key, int amountToAdd, LiteDatabase database)
         {
             try
             {
-                var itemCollection = context.database.GetCollection<Item>("Items");
-                var item = GetItem(key);
+                var itemCollection = database.GetCollection<Item>("Items");
+                var item = GetItem(key, database);
 
                 item.totalInventory += amountToAdd;
                 itemCollection.Update(item);
@@ -51,7 +50,7 @@ namespace VideoGameOrderingSystem.Data.Services
             }
         }
 
-        public void UpdateTotalInventoryAfterReduction(Item item, int amountToReduce)
+        public void UpdateTotalInventoryAfterReduction(Item item, int amountToReduce, LiteDatabase database)
         {
             try
             {
@@ -81,13 +80,13 @@ namespace VideoGameOrderingSystem.Data.Services
             }
         }
 
-        public void ReduceInventory(Item item, Order order)
+        public void ReduceInventory(Item item, Order order, LiteDatabase database)
         {
             var amountToReduce = order.amountOrdered[item.id];
             CheckItemHasEnoughInventory(item, amountToReduce);
             if (item.hasEnoughInventory)
             {
-                UpdateTotalInventoryAfterReduction(item, amountToReduce);
+                UpdateTotalInventoryAfterReduction(item, amountToReduce, database);
             }
             else
             {
