@@ -10,11 +10,11 @@ namespace VideoGameOrderingSystem
         static void Main(string[] args)
         {
 
-            ItemService itemService = new ItemService();
+            IItemService itemService = new ItemService();
             //OrderingService orderingService = new OrderingService();
             
             LiteDatabase database = new LiteDatabase(@"D:\Developer\C#\VideoGameOrderingSystem\VideoGameOrderingSystem\VideoGameOrderingSystem.Data\Database\Main.db");
-            
+
             var halo = itemService.GetItem(1, database);
             var callOfDuty = itemService.GetItem(2, database);
             

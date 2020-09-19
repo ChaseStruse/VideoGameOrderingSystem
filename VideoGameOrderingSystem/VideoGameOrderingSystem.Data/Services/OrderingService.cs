@@ -9,7 +9,7 @@ namespace VideoGameOrderingSystem
 {
     public class OrderingService
     {
-        private ItemService itemService = new ItemService();
+        private IItemService itemService = new ItemService();
 
         public void AddItemToOrder(Order order, Item item, int amountOrdered)
         {

@@ -16,7 +16,7 @@ namespace VideoGameOrderingSystem.Data.Services
         void CheckItemHasEnoughInventory(Item item, int amountToReduce);
         void ReduceInventory(Item item, Order order, LiteDatabase database);
     }
-    public class ItemService
+    public class ItemService : IItemService
     {
         public void AddItemToDatabase(Item item, LiteDatabase database)
         {
