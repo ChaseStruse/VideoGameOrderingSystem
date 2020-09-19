@@ -7,6 +7,15 @@ using VideoGameOrderingSystem.Data.Models;
 
 namespace VideoGameOrderingSystem.Data.Services
 {
+    public interface IItemService
+    {
+        void AddItemToDatabase(Item item, LiteDatabase database);
+        Item GetItem(int key, LiteDatabase database);
+        void AddInventory(int key, int amountToAdd, LiteDatabase database);
+        void UpdateTotalInventoryAfterReduction(Item item, int amountToReduce, LiteDatabase database);
+        void CheckItemHasEnoughInventory(Item item, int amountToReduce);
+        void ReduceInventory(Item item, Order order, LiteDatabase database);
+    }
     public class ItemService
     {
         public void AddItemToDatabase(Item item, LiteDatabase database)
