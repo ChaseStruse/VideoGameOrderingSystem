@@ -11,7 +11,7 @@ namespace VideoGameOrderingSystem
         {
 
             ItemService itemService = new ItemService();
-            OrderingService orderingService = new OrderingService();
+            //OrderingService orderingService = new OrderingService();
             
             LiteDatabase database = new LiteDatabase(@"/home/codespace/workspace/VideoGameOrderingSystem/VideoGameOrderingSystem/VideoGameOrderingSystem.Data/Database/Main.db");
             
@@ -20,8 +20,8 @@ namespace VideoGameOrderingSystem
             
             Order order = new Order();
 
-            orderingService.AddItemToOrder(order, halo, 1);
-            orderingService.AddItemToOrder(order, callOfDuty, 1);
+            //orderingService.AddItemToOrder(order, halo, 1);
+            //orderingService.AddItemToOrder(order, callOfDuty, 1);
             
             //itemService.AddItemToDatabase(item);
             
