@@ -9,18 +9,26 @@ namespace VideoGameOrderingSystem
 {
     public class OrderingService
     {
-        private ItemService itemService = new ItemService();
+        private LiteDatabase database;
+        private ILiteCollection<Order> orderCollection;
+        private IItemService itemService;
 
+        public OrderingService(LiteDatabase _database)
+        {
+            database = _database;
+            orderCollection = database.GetCollection<Order>("Orders");
+            itemService = new ItemService(database);
+        }
         public void AddItemToOrder(Order order, Item item, int amountOrdered)
         {
             order.items.Add(item.id, item);
             order.amountOrdered.Add(item.id, amountOrdered);
         }
-        public void ValidateItemInventoryAndReduceInventory(Order order, LiteDatabase database)
+        public void ValidateItemInventoryAndReduceInventory(Order order)
         {
             foreach (Item item in order.items.Values)
             {
-                itemService.ReduceInventory(item, order, database);
+                itemService.ReduceInventory(item, order);
             }
         }
         public void CommitOrderToDatabase(Order order)
