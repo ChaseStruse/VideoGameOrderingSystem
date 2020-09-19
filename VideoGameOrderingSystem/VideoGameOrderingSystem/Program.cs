@@ -11,15 +11,15 @@ namespace VideoGameOrderingSystem
         {
 
             ItemService itemService = new ItemService();
-            OrderingService orderingService = new OrderingService();
+            //OrderingService orderingService = new OrderingService();
             
             var halo = itemService.GetItem(1);
             var callOfDuty = itemService.GetItem(2);
             
             Order order = new Order();
 
-            orderingService.AddItemToOrder(order, halo, 1);
-            orderingService.AddItemToOrder(order, callOfDuty, 1);
+            //orderingService.AddItemToOrder(order, halo, 1);
+            //orderingService.AddItemToOrder(order, callOfDuty, 1);
             
             //itemService.AddItemToDatabase(item);
             
